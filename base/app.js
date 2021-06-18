@@ -5,8 +5,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-/* var specialtyRouter = require('./routes/specialty');
-var roleRouter = require('./routes/role');
+var specialtyRouter = require('./routes/specialty');
+/* var roleRouter = require('./routes/role');
 var courrencieRouter = require('./routes/courrencie');
 var workSpaceRouter = require('./routes/workspace');
 var conditionRouter = require('./routes/condition');
@@ -32,8 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-/* app.use('/specialty', specialtyRouter);
-app.use('/role', roleRouter);
+app.use('/specialty', specialtyRouter);
+/* app.use('/role', roleRouter);
 app.use('/courrencie', courrencieRouter);
 app.use('/workspace', workSpaceRouter);
 app.use('/condition', conditionRouter);
