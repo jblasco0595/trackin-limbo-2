@@ -13,7 +13,7 @@ router.post(
         .isIn(['user', 'admin', 'super-admin'])
         .withMessage('select one of the following options: backend, frontend, server, mobile, desing, tester, project-manager')
         .not().isEmpty()
-        .withMessage('specialty required!'),
+        .withMessage('role required!'),
     validator.returnErrors,
     controller.store
 )
@@ -32,7 +32,7 @@ router.put(
         .isIn(['user', 'admin', 'super-admin'])
         .withMessage('select one of the following options: backend, frontend, server, mobile, desing, tester, project-manager')
         .not().isEmpty()
-        .withMessage('specialty required!'),
+        .withMessage('role required!'),
     validator.returnErrors, 
     controller.update
 )
