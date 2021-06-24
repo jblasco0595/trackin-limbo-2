@@ -5,7 +5,6 @@ const dbModel = WorkSpace
 const dbModelMsg = "WorkSpace"
 
 const store = (req, res, next) => {
-    console.log('hola')
     dbModel.create({ 
         ...req.body, 
     })
