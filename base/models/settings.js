@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Settings.init({
+    name: DataTypes.STRING,
     usdArsRate: DataTypes.FLOAT
   }, {
     sequelize,
