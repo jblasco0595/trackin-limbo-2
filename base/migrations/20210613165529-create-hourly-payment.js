@@ -11,7 +11,7 @@ module.exports = {
       amount: {
         type: Sequelize.FLOAT
       },
-      courrencyId: {
+      courrencieId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

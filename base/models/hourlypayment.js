@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   HourlyPayment.init({
     amount: DataTypes.FLOAT,
-    courrencyId: DataTypes.INTEGER
+    courrencieId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'HourlyPayment',
