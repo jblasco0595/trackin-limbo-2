@@ -16,8 +16,8 @@ var userRoleRouter = require('./routes/userrole');
 var userWorkspaceRouter = require('./routes/userworkspace');
 var teamMemberRouter = require('./routes/teammember');
 var hourlyPaymentRouter = require('./routes/hourlypayment');
-/* var userHourlyPaymentRouter = require('./routes/userhourlypayment');
-var trakedHoursRouter = require('./routes/trakedhours');
+var userHourlyPaymentRouter = require('./routes/userhourlypayment');
+/* var trakedHoursRouter = require('./routes/trakedhours');
 var trakedHoursConditionRouter = require('./routes/trakedhourscondition');
 var userSpecialtyRouter = require('./routes/userspecialty'); */
 
@@ -43,8 +43,8 @@ app.use('/userrole', userRoleRouter);
 app.use('/userworkspace', userWorkspaceRouter);
 app.use('/teammember', teamMemberRouter);
 app.use('/hourlypayment', hourlyPaymentRouter);
-/* app.use('/userhourlypayment', userHourlyPaymentRouter);
-app.use('/trakedhours', trakedHoursRouter);
+app.use('/userhourlypayment', userHourlyPaymentRouter);
+/* app.use('/trakedhours', trakedHoursRouter);
 app.use('/trakedhourscondition', trakedHoursConditionRouter);
 app.use('/userspecialty', userSpecialtyRouter); */
 

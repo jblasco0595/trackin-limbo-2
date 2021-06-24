@@ -63,8 +63,8 @@ const existsId = (value) => {
     return dbModel.findOne({ 
         where: { id: value }
     })
-    .then((range) => { 
-        if (range === null) {
+    .then((role) => { 
+        if (role === null) {
             return Promise.reject('this ' + dbModelMsg + ' does not exist')
         } 
     })

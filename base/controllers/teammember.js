@@ -85,8 +85,8 @@ const existsId = (value) => {
     return dbModel.findOne({ 
         where: { id: value }
     })
-    .then((appaccountwarning) => { 
-        if (appaccountwarning === null) {
+    .then((teammember) => { 
+        if (teammember === null) {
             return Promise.reject('this ' + dbModelMsg + ' does not exist')
         } 
     })
