@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       conditionId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Conditions',
+          key: 'id' 
+        },
+        allowNull: false
       },
       trackedHourId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'TrakedHours',
+          key: 'id' 
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

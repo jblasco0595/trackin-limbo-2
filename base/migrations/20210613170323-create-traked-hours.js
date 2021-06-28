@@ -9,7 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id' 
+        },
+        allowNull: false
       },
       hour: {
         type: Sequelize.INTEGER
@@ -18,7 +23,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       projectId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Projects',
+          key: 'id' 
+        },
+        allowNull: false
       },
       invoiced: {
         type: Sequelize.BOOLEAN

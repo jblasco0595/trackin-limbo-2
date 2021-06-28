@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id' 
+        },
+        allowNull: false
       },
       hourlyPaymentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'HourlyPayments',
+          key: 'id' 
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

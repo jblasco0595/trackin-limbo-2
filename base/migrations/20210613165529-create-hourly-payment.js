@@ -12,7 +12,12 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       courrencieId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Courrencies',
+          key: 'id' 
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

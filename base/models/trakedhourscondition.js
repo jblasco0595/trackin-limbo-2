@@ -10,7 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      TrakedHoursCondition.belongsTo(models.Condition, {
+        foreignKey: 'conditionId',
+        as: 'condition'
+      });
+      TrakedHoursCondition.belongsTo(models.TrakedHours, {
+        foreignKey: 'trackedHourId',
+        as: 'trackedHour'
+      });
     }
   };
   TrakedHoursCondition.init({
