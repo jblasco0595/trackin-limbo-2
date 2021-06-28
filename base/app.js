@@ -19,8 +19,8 @@ var hourlyPaymentRouter = require('./routes/hourlypayment');
 var userHourlyPaymentRouter = require('./routes/userhourlypayment');
 var projectRouter = require('./routes/project');
 var trakedHoursRouter = require('./routes/trakedhours');
-/* var trakedHoursConditionRouter = require('./routes/trakedhourscondition');
-var userSpecialtyRouter = require('./routes/userspecialty'); */
+var trakedHoursConditionRouter = require('./routes/trakedhourscondition');
+var userSpecialtyRouter = require('./routes/userspecialty'); 
 
 
 var app = express();
@@ -47,7 +47,7 @@ app.use('/hourlypayment', hourlyPaymentRouter);
 app.use('/userhourlypayment', userHourlyPaymentRouter);
 app.use('/project', projectRouter);
 app.use('/trakedhours', trakedHoursRouter);
-/* app.use('/trakedhourscondition', trakedHoursConditionRouter);
-app.use('/userspecialty', userSpecialtyRouter); */
+app.use('/trakedhourscondition', trakedHoursConditionRouter);
+app.use('/userspecialty', userSpecialtyRouter);
 
 module.exports = app;
