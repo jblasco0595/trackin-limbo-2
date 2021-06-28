@@ -37,7 +37,8 @@ router.put(
 router.delete(
     '/delete/:id', 
     param('id')
-        .custom(controller.existsId),
+        .custom(controller.existsId)
+        .custom(controller.isNotHourlyPaymentAssociated),
     validator.returnErrors,
     controller.destroy)
 

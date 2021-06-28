@@ -1,4 +1,4 @@
-const { User, Range, Client, UserBank, Payments, Balance, BssAccount, Transaction, BssBalance } = require ('../models/index')
+const { User, UserRole, UserWorkspace, TeamMember, UserHourlyPayment, TrakedHours, UserSpecialty } = require ('../models/index')
 const errors = require('../middleware/errors')
 const bcrypt = require ('bcrypt')
 const salt = bcrypt.genSaltSync (10)
@@ -88,24 +88,12 @@ const notExistUserName = (value) => {
     });
 }
 
-/* const isNotClientAssociated = (value) => {
-    record = "client"
-    return Client.findOne({ 
-        where: { userId: value }
-    })
-    .then((client) => { 
-        if (client) {
-            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
-        } 
-    })
-} */
-
 const existsId = (value) => {
     return dbModel.findOne({ 
         where: { id: value }
     })
-    .then((range) => { 
-        if (range === null) {
+    .then((user) => { 
+        if (user === null) {
             return Promise.reject('this ' + dbModelMsg + ' does not exist')
         } 
     })
@@ -147,6 +135,78 @@ const isUserNameAvailable = (userName, id) => {
     })
 }
 
+const isNotUserRoleAssociated = (value) => {
+    record = "user role"
+    return UserRole.findOne({ 
+        where: { userId: value }
+    })
+    .then((userrole) => { 
+        if (userrole) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotUserWorkspaceAssociated = (value) => {
+    record = "user workspace"
+    return UserWorkspace.findOne({ 
+        where: { userId: value }
+    })
+    .then((userworkspace) => { 
+        if (userworkspace) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotTeamMemberAssociated = (value) => {
+    record = "team member"
+    return TeamMember.findOne({ 
+        where: { userId: value }
+    })
+    .then((teammember) => { 
+        if (teammember) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotUserHourlyPaymentAssociated = (value) => {
+    record = "user hourly payment"
+    return UserHourlyPayment.findOne({ 
+        where: { userId: value }
+    })
+    .then((userhourlypayment) => { 
+        if (userhourlypayment) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotTrakedHoursAssociated = (value) => {
+    record = "traked hours"
+    return TrakedHours.findOne({ 
+        where: { userId: value }
+    })
+    .then((trakedhours) => { 
+        if (trakedhours) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotUserSpecialtyAssociated = (value) => {
+    record = "user specialty"
+    return UserSpecialty.findOne({ 
+        where: { userId: value }
+    })
+    .then((userspecialty) => { 
+        if (userspecialty) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -157,6 +217,11 @@ module.exports = {
     notExistUserName,
     existsId,
     isEmailAvailable,
-    isUserNameAvailable
-    /* isNotClientAssociated, */
+    isUserNameAvailable,
+    isNotUserRoleAssociated,
+    isNotUserWorkspaceAssociated,
+    isNotTeamMemberAssociated,
+    isNotUserHourlyPaymentAssociated,
+    isNotTrakedHoursAssociated,
+    isNotUserSpecialtyAssociated
 };

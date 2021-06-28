@@ -1,4 +1,4 @@
-const { Courrencie } = require ('../models/index')
+const { Courrencie, HourlyPayment } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = Courrencie
@@ -70,6 +70,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotHourlyPaymentAssociated = (value) => {
+    record = "hourly payment"
+    return HourlyPayment.findOne({ 
+        where: { courrencieId: value }
+    })
+    .then((hourlypayment) => { 
+        if (hourlypayment) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +89,5 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotHourlyPaymentAssociated
 };

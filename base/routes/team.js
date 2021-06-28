@@ -30,7 +30,9 @@ router.put(
 router.delete(
     '/delete/:id', 
     param('id')
-        .custom(controller.existsId),
+        .custom(controller.existsId)
+        .custom(controller.isNotTeamMemberAssociated)
+        .custom(controller.isNotProjectProjectAssociated),
     validator.returnErrors,
     controller.destroy)
 

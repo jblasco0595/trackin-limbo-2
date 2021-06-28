@@ -40,7 +40,8 @@ router.put(
 router.delete(
     '/delete/:id', 
     param('id')
-        .custom(controller.existsId),
+        .custom(controller.existsId)
+        .custom(controller.isNotUserRoleAssociated),
     validator.returnErrors,
     controller.destroy)
 

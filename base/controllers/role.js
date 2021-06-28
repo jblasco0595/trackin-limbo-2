@@ -1,4 +1,4 @@
-const { Role } = require ('../models/index')
+const { Role, UserRole } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = Role
@@ -70,6 +70,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotUserRoleAssociated = (value) => {
+    record = "user role"
+    return UserRole.findOne({ 
+        where: { roleId: value }
+    })
+    .then((userrole) => { 
+        if (userrole) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +89,5 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotUserRoleAssociated
 };

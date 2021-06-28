@@ -66,7 +66,13 @@ router.put(
 router.delete(
     '/delete/:id', 
     param('id')
-        .custom(controller.existsId),
+        .custom(controller.existsId)
+        .custom(controller.isNotUserRoleAssociated)
+        .custom(controller.isNotUserWorkspaceAssociated)
+        .custom(controller.isNotTeamMemberAssociated)
+        .custom(controller.isNotUserHourlyPaymentAssociated)
+        .custom(controller.isNotTrakedHoursAssociated)
+        .custom(controller.isNotUserSpecialtyAssociated),
     validator.returnErrors,
     controller.destroy)
 

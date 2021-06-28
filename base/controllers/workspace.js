@@ -1,4 +1,4 @@
-const { WorkSpace } = require ('../models/index')
+const { WorkSpace, UserWorkspace } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = WorkSpace
@@ -70,6 +70,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotUserWorkspaceAssociated = (value) => {
+    record = "user workspace"
+    return UserWorkspace.findOne({ 
+        where: { workspaceId: value }
+    })
+    .then((userworkspace) => { 
+        if (userworkspace) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +89,5 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotUserWorkspaceAssociated
 };

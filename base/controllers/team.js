@@ -1,4 +1,4 @@
-const { Team } = require ('../models/index')
+const { Team, TeamMember, Project } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = Team
@@ -70,6 +70,30 @@ const existsId = (value) => {
     })
 }
 
+const isNotTeamMemberAssociated = (value) => {
+    record = "teammember"
+    return TeamMember.findOne({ 
+        where: { teamId: value }
+    })
+    .then((teammember) => { 
+        if (teammember) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
+const isNotProjectProjectAssociated = (value) => {
+    record = "project"
+    return Project.findOne({ 
+        where: { teamId: value }
+    })
+    .then((project) => { 
+        if (project) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +101,6 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotTeamMemberAssociated,
+    isNotProjectProjectAssociated
 };

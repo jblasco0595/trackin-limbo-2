@@ -1,4 +1,4 @@
-const { Specialty } = require ('../models/index')
+const { Specialty, UserSpecialty } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = Specialty
@@ -70,6 +70,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotUserSpecialtyAssociated = (value) => {
+    record = "users pecialty"
+    return UserSpecialty.findOne({ 
+        where: { specialtyId: value }
+    })
+    .then((userspecialty) => { 
+        if (userspecialty) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +89,5 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotUserSpecialtyAssociated
 };

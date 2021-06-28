@@ -1,4 +1,4 @@
-const { Condition } = require ('../models/index')
+const { Condition, TrakedHoursCondition } = require ('../models/index')
 const errors = require('../middleware/errors')
 
 const dbModel = Condition
@@ -70,6 +70,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotTrakedHoursConditionAssociated = (value) => {
+    record = "trakedhours condition"
+    return TrakedHoursCondition.findOne({ 
+        where: { conditionId: value }
+    })
+    .then((trakedhourscondition) => { 
+        if (trakedhourscondition) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -77,4 +89,5 @@ module.exports = {
     update,
     destroy,
     existsId,
+    isNotTrakedHoursConditionAssociated
 };

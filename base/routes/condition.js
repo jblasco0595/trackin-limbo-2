@@ -36,7 +36,8 @@ router.put(
 router.delete(
     '/delete/:id', 
     param('id')
-        .custom(controller.existsId),
+        .custom(controller.existsId)
+        .custom(controller.isNotTrakedHoursConditionAssociated),
     validator.returnErrors,
     controller.destroy)
 

@@ -1,4 +1,4 @@
-const { Project, Team } = require ('../models/index')
+const { Project, Team, TrakedHours } = require ('../models/index')
 const errors = require('../middleware/errors')
 const dbModel = Project
 const dbModelMsg = "Project"
@@ -80,6 +80,18 @@ const existsId = (value) => {
     })
 }
 
+const isNotTrakedHoursAssociated = (value) => {
+    record = "traked hours"
+    return TrakedHours.findOne({ 
+        where: { projectId: value }
+    })
+    .then((trakedhours) => { 
+        if (trakedhours) {
+            return Promise.reject('You cannot delete this ' + dbModelMsg + ' because it is related to ' + record)
+        } 
+    })
+}
+
 module.exports = {
     store,
     index,
@@ -88,4 +100,5 @@ module.exports = {
     destroy,
     existsTeamId,
     existsId,
+    isNotTrakedHoursAssociated
 };
