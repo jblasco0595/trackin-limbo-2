@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       HourlyPayment.belongsTo(models.Courrencie, {
         foreignKey: 'courrencieId',
-        as: 'team'
+        as: 'courrencie'
       });
     }
   };

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       UserWorkspace.belongsTo(models.WorkSpace, {
         foreignKey: 'workspaceId',
-        as: 'workSpace'
+        as: 'workspace'
       });
     }
   };

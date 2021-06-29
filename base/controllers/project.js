@@ -15,6 +15,7 @@ const store = (req, res, next) => {
 
 const index = (req, res, next) => {
     dbModel.findAll({
+        include: "team"
     })
     .then( response => {
         res.status( 200 ).json( response )
@@ -26,6 +27,7 @@ const index = (req, res, next) => {
 
 const show = (req, res, next) => {
     Record = dbModel.findOne({ 
+        include: "team",
         where: { id: req.params.id }
     })
     .then((record) => { 
