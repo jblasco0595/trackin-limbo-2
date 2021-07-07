@@ -1,0 +1,65 @@
+version: '3.2'
+services:
+  db:
+    container_name: db
+    image: mysql:5.7
+    volumes:
+      - ./base/data/db:/var/lib/mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: traker_limbo
+      MYSQL_USER: traker_limbo
+      MYSQL_PASSWORD: password2020
+      MYSQL_ROOT_PASSWORD: password2020
+      MYSQL_ROOT_HOST: "%"
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+    ports:
+    - mode: host
+      target: 80
+      published: 5580
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      UPLOAD_LIMIT: 3000000000
+  myapp:
+    container_name: myapp
+    image: jblasco0595/limbonodejs-v1:firsttry
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+    volumes:
+      - ./base:/home/node/app
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+    ports:
+    - mode: host
+      target: 8000
+      published: 5500
+    command: "tail -f /dev/null"
+volumes:
+  db_data:
+    driver: local

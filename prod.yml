@@ -1,0 +1,63 @@
+version: '3.2'
+services:
+  db:
+    container_name: dbv
+    image: mysql:5.7
+    volumes:
+      - ./base/data/db:/var/lib/mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 450M
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: baseNodeJsExpressdb
+      MYSQL_USER: baseNodeJsExpressuser
+      MYSQL_PASSWORD: passbaseNodeJsExpress2020..
+      MYSQL_ROOT_PASSWORD: password2020
+      MYSQL_ROOT_HOST: "%"
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 50M
+    ports:
+    - mode: host
+      target: 80
+      published: 7080
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      UPLOAD_LIMIT: 3000000000
+  myapp:
+    container_name: myapp
+    image: jblasco0595/limbonodejs-v1:firsttry
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+    volumes:
+      - ./base:/var/www/html
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.63"
+          memory: 1.2G
+    ports:
+    - mode: host
+      target: 8000
+      published: 7000
+    command: "tail -f /dev/null"
+volumes:
+  db_data:
+    driver: local
