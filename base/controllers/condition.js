@@ -1,6 +1,6 @@
 const { Condition, TrakedHoursCondition } = require ('../models/index')
 const errors = require('../middleware/errors')
-
+/* test */
 const dbModel = Condition
 const dbModelMsg = "Condition"
 
